@@ -1,6 +1,9 @@
 import pandas as pd
 import json
 from steam_id_tools import to_steamID, to_numeric_string
+from Player import Player
+from Team import Team
+from Match import Match
 
 
 sheet_id = "1IsO2CVtWUKuaFGSX_F_tuoaNpO-g0h4esTuck-4wxiM"
