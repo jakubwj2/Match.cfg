@@ -1,6 +1,6 @@
 import pandas as pd
 import json
-from steam_id_tools import to_steamID, to_numeric_string
+from steam_id_tools import to_numeric_string
 from Player import Player
 from Team import Team
 from Match import Match
@@ -17,7 +17,7 @@ registration_information.rename(columns={"Jméno": "Firstname",
                                          "Steam kód uživatele": "Steam_Id"},
                                 inplace=True)
 registration_information.drop(range(34, len(registration_information)), inplace=True)
-registration_information.loc[:,"Steam_Id"] = registration_information.Steam_Id.apply(to_numeric_string)
+registration_information.loc[:, "Steam_Id"] = registration_information.Steam_Id.apply(to_numeric_string)
 teams_df = registration_information.groupby("Team")
 # Rearrange registration information to a usable format.
 
@@ -29,14 +29,14 @@ for team_name, team in teams_df:
                        for index, player in team.iterrows()]))
 # Create a list of team objs from registration details
 
-match = Match(teams[2], teams[4])
+match = Match(teams[1], teams[4])
 
 with open("match_cfg_template.json", "r") as match_template, open("match.json", "w") as match_cfg:
     match_json = json.load(match_template)
 
     match_json["team1"]["name"] = match.team1.name
-    match_json.update({"matchid":match.match_id,
-                       "num_maps":match.num_maps,
+    match_json.update({"matchid": match.match_id,
+                       "num_maps": match.num_maps,
                        "team1": match.team1.team,
                        "team2": match.team2.team})
     match_cfg.write(json.dumps(match_json, indent=4, sort_keys=True))
