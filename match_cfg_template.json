@@ -59,6 +59,12 @@
 	},
 
 	"cvars": {
-		"hostname": "Match server #1"
+		"hostname": "Match server #1",
+		"get5_max_pauses": 4,
+		"get5_reset_pauses_each_half": 0,
+		"get5_fixed_pause_time": 30,
+		"get5_pausing_enabled": 1,
+		"get5_kick_when_no_match_loaded": 0,
+		"get5_print_damage": 1
 	}
 }
