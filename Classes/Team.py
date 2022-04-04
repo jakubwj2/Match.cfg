@@ -3,7 +3,7 @@ from steam_id_tools import to_steamID
 
 class Team:
     def __init__(self, name, players):
-        self.name = name
+        self.name = name.replace(" ", "_")
         self.players = players
 
     def get_team(self):

@@ -1,9 +1,9 @@
 import pandas as pd
-import json
 from steam_id_tools import to_numeric_string
-from Player import Player
-from Team import Team
-from Match import Match
+from Classes.Player import Player
+from Classes.Team import Team
+from Classes.Match import Match
+from Classes.Tournament import Tournament
 
 
 sheet_id = "1IsO2CVtWUKuaFGSX_F_tuoaNpO-g0h4esTuck-4wxiM"
@@ -30,14 +30,8 @@ for team_name, team in teams_df:
 # Create a list of team objs from registration details
 
 match = Match(teams[1], teams[4])
+match.to_json("match")
 
-with open("match_cfg_template.json", "r") as match_template, open("match.json", "w") as match_cfg:
-    match_json = json.load(match_template)
-
-    match_json["team1"]["name"] = match.team1.name
-    match_json.update({"matchid": match.match_id,
-                       "num_maps": match.num_maps,
-                       "team1": match.team1.team,
-                       "team2": match.team2.team})
-    match_cfg.write(json.dumps(match_json, indent=4, sort_keys=True))
-# print([[player.name, player.steam_id] for player in teams[4].players])
+tournament = Tournament(teams)
+tournament.tournament_format()
+tournament.group_matches()
